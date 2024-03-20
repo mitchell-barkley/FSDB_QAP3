@@ -1,0 +1,17 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Full-Stack/Database QAP3</title>
+  </head>
+  <body>
+    <h1>DAL's Restaurant</h1>
+    <% include('./partials/nav.ejs') %>
+    <p>
+        <h2>Delete Menu Item</h2>
+        <form action="/menu/delete" method="post">
+            <label for="id">ID</label>
+            <input type="text" id="id" name="id" required>
+            <button type="submit">Delete</button>
+        </form>
+    </p>
+  </body>
