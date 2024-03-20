@@ -1,0 +1,19 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Full-Stack/Database QAP3</title>
+  </head>
+  <body>
+    <h1>DAL's Restaurant</h1>
+    <% include('./partials/nav.ejs') %>
+    <p>
+        <h2>Menu</h2>
+        <ul>
+            <% for (let i = 0; i < menu.length; i++) { %>
+                <li>
+                    <a href="/menu/<%= menu[i].id %>"><%= menu[i].name %></a>
+                </li>
+            <% } %>
+        </form>
+    </p>
+  </body>

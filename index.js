@@ -13,15 +13,18 @@ app.get('/', (req, res) => {
     res.render('index.ejs');
 });
 
-app.get('/about', (req, res) => {
-    res.render('about.ejs');
-});
+const menuRouter = require('./routes/menu.js');
+app.use('/menu', menuRouter);
+
+const apiRouter = require('./routes/api/home.js');
+app.use('/api', apiRouter);
 
 app.use((req, res) => {
-    res.status(404).render('404.ejs');
+    res.status(404).render('error.ejs');
 });
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
 
+module.exports = app;
