@@ -1,14 +1,14 @@
 const express = require('express');
+const uuid = require('uuid');
 const router = express.Router();
 const menuController = require('../services/pg.menu.dal.js');
-const pool = require('../services/pg.menudb.js');
 
 if(DEBUG) console.log('Loading menu routes');
 
 router.get('/', async (req, res) => {
     try {
-        const menu = await menuController.getMenu();
-        res.render('views/index.ejs', { menuItems: menuItems});
+        let menu = await menuController.getMenu();
+        res.render('.index.js', { menu });
     } catch (error) {
         res.status(500).send(error.message);
     }
@@ -17,20 +17,20 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const menuItem = await menuController.getMenuItem(req.params.id);
-        if (menuItem.length === 0) {
-            res.render('views/menuItemNotFound.ejs', { id: req.params.id });
+        if (menuItem === undefined) {
+            res.render('error.ejs', { id: req.params.id });
         } else {
-            res.render('views/menuItem.ejs', { id: req.params.id, menuItem: menuItem });
+            res.render('menu', { menuItem });
         }
     } catch (error) {
         res.status(500).send(error.message);
     }
 });
 
-router.post('/add', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         await menuController.addMenuItem(req.body);
-        res.redirect('/menu/', { menuItem: req.body });
+        res.redirect('/menu/');
     } catch (error) {
         res.status(500).send(error.message);
     }
@@ -44,7 +44,7 @@ router.get('/:id/edit', async (req, res) => {
     }
 });
 
-router.patch('/:id/edit', async (req, res) => {
+router.patch('/:id', async (req, res) => {
     try {
         await menuController.updateMenuItem(req.params.id, req.body);
         res.redirect('/menu/', { id: req.params.id, menuItem: req.body});
@@ -53,7 +53,7 @@ router.patch('/:id/edit', async (req, res) => {
     }
 });
 
-router.get(':id/delete', async (req, res) => {
+router.get('/:id/delete', async (req, res) => {
     try {
         res.render('menuDelete.ejs', { id: req.params.id, menuItem: req.body});
     } catch (error) {
@@ -61,7 +61,7 @@ router.get(':id/delete', async (req, res) => {
     }
 });
 
-router.delete(':id/delete', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         await menuController.deleteMenuItem(req.params.id);
         res.redirect('/menu/');

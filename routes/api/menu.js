@@ -10,4 +10,17 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/:id', async (req, res) => {
+    try {
+        const menuItem = await menuController.getMenuItem(req.params.id);
+        if (menuItem === undefined) {
+            res.status(404).json({ id: req.params.id });
+        } else {
+            res.json(menuItem);
+        }
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+});
+
 module.exports = router;

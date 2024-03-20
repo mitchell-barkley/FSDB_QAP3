@@ -1,49 +1,58 @@
-const dal = require('../services/pg.menudb.js');
+const dal = require('./pg.menudb.js');
 
-var getMenu = async function getMenu() {
+async function getMenu() {
     if(DEBUG) console.log('Getting menu');
-    return new Promise((resolve, reject) => {
-        resolve(
-            dal.pool.query('SELECT * FROM public.pizzas')
-        );
-    });
+    const sql = 'SELECT * FROM public.pizzas';
+    try {
+        const results = await dal.query(sql);
+        return results.rows;
+    } catch (error) {
+        throw error;
+    }
 };
 
-var addMenuItem = async function addMenuItem(item) {
+async function addMenuItem(price, name) {
     if(DEBUG) console.log('Adding menu item');
-    return new Promise((resolve, reject) => {
-        resolve(
-            dal.pool.query('INSERT INTO public.pizzas(price, pizza_name) \
-            VALUES ();', [item.price, item.name] )
-        );
-    });
+    const sql = 'INSERT INTO public.pizzas(price, pizza_name) VALUES ($1, $2)';
+    try {
+        let result = await dal.query(sql, [price, name]);
+        return result.rows[0].id;
+    } catch (error) {
+        throw error;
+    }
 };
 
-var getMenuItem = async function getMenuItem(id) {
+async function getMenuItem(id) {
     if(DEBUG) console.log('Getting menu item');
-    return new Promise((resolve, reject) => {
-        resolve(
-            dal.pool.query('SELECT * FROM public.pizzas WHERE id = $1', [id])
-            );
-    });
+    const sql = 'SELECT * FROM public.pizzas WHERE id = $1';
+    try {
+        const result = await dal.query(sql, [id]);
+        return result.rows[0];
+    } catch (error) {
+        throw error;
+    }
 };
 
-var updateMenuItem = async function updateMenuItem(id, item) {
+async function updateMenuItem(id, price, name) {
     if(DEBUG) console.log('Updating menu item');
-    return new Promise((resolve, reject) => {
-        resolve(
-            dal.pool.query('UPDATE public.pizzas SET name = $1, price = $2 WHERE id = $3', [item.name, item.price, id])
-        );
-    });
+    const sql = 'UPDATE public.pizzas SET price = $1, pizza_name = $2 WHERE id = $3';
+    try {
+        const result = await dal.query(sql, [price, name, id]);
+        return result.rowCount;
+    } catch (error) {
+        throw error;
+    }
 };
 
-var deleteMenuItem = async function deleteMenuItem(id) {
+async function deleteMenuItem(id) {
     if(DEBUG) console.log('Deleting menu item');
-    return new Promise((resolve, reject) => {
-        resolve(
-            dal.pool.query('DELETE FROM public.pizzas WHERE id = $1', [id])
-        );
-    });
+    const sql = 'DELETE FROM public.pizzas WHERE id = $1';
+    try {
+        const result = await dal.query(sql, [id]);
+        return result.rowCount;
+    } catch (error) {
+        throw error;
+    }
 };
 
 module.exports = {
