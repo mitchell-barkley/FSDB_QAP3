@@ -16,8 +16,8 @@ app.get('/', (req, res) => {
 const menuRouter = require('./routes/menu.js');
 app.use('/menu', menuRouter);
 
-const apiRouter = require('./routes/api/home.js');
-app.use('/api', apiRouter);
+// const apiRouter = require('./routes/api/');
+// app.use('/api', apiRouter);
 
 app.use((req, res) => {
     res.status(404).render('error.ejs');
@@ -26,5 +26,3 @@ app.use((req, res) => {
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
-
-module.exports = app;

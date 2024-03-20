@@ -7,6 +7,4 @@ const pool = new Pool({
     port: 16000,
 });
 
-module.exports = {
-    pool
-};
+module.exports = pool;
