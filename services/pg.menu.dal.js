@@ -1,8 +1,8 @@
 const dal = require('./pg.menudb.js');
 
 async function getMenu() {
-    if(DEBUG) console.log('Getting menu');
-    const sql = 'SELECT * FROM public.pizzas';
+    if(DEBUG) console.log('Getting menu from DB');
+    const sql = 'SELECT * FROM public."pizzas"';
     try {
         const results = await dal.query(sql);
         return results.rows;
@@ -12,8 +12,8 @@ async function getMenu() {
 };
 
 async function addMenuItem(price, name) {
-    if(DEBUG) console.log('Adding menu item');
-    const sql = 'INSERT INTO public.pizzas(price, pizza_name) VALUES ($1, $2)';
+    if(DEBUG) console.log('Adding menu item to DB');
+    const sql = 'INSERT INTO public."pizzas"(price, pizza_name) VALUES ($1, $2)';
     try {
         let result = await dal.query(sql, [price, name]);
         return result.rows[0].id;
@@ -23,8 +23,8 @@ async function addMenuItem(price, name) {
 };
 
 async function getMenuItem(id) {
-    if(DEBUG) console.log('Getting menu item');
-    const sql = 'SELECT * FROM public.pizzas WHERE id = $1';
+    if(DEBUG) console.log('Getting menu item by ID from DB');
+    const sql = 'SELECT * FROM public."pizzas" WHERE id = $1';
     try {
         const result = await dal.query(sql, [id]);
         return result.rows[0];
@@ -34,8 +34,8 @@ async function getMenuItem(id) {
 };
 
 async function updateMenuItem(id, price, name) {
-    if(DEBUG) console.log('Updating menu item');
-    const sql = 'UPDATE public.pizzas SET price = $1, pizza_name = $2 WHERE id = $3';
+    if(DEBUG) console.log('Updating menu item in DB');
+    const sql = 'UPDATE public."pizzas" SET price = $1, pizza_name = $2 WHERE id = $3';
     try {
         const result = await dal.query(sql, [price, name, id]);
         return result.rowCount;
@@ -45,8 +45,8 @@ async function updateMenuItem(id, price, name) {
 };
 
 async function deleteMenuItem(id) {
-    if(DEBUG) console.log('Deleting menu item');
-    const sql = 'DELETE FROM public.pizzas WHERE id = $1';
+    if(DEBUG) console.log('Deleting menu item from DB');
+    const sql = 'DELETE FROM public."pizzas" WHERE id = $1';
     try {
         const result = await dal.query(sql, [id]);
         return result.rowCount;

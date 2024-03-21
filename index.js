@@ -10,19 +10,27 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
 app.get('/', (req, res) => {
-    res.render('index.ejs');
+    res.render('home.ejs')
 });
+
+app.get('/contact', (req, res) => {
+    res.render('contact.ejs')
+});
+
+const loginsRouter = require('./routes/logins.js');
+app.use('/logins', loginsRouter);
+
+const apiRouter = require('./routes/api');
+app.use('/api', apiRouter);
 
 const menuRouter = require('./routes/menu.js');
 app.use('/menu', menuRouter);
 
-// const apiRouter = require('./routes/api/');
-// app.use('/api', apiRouter);
-
-app.use((req, res) => {
-    res.status(404).render('error.ejs');
-});
+const menuApiRouter = require('./routes/api/menu.js');
+app.use('/api/menu', menuApiRouter);
 
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+    console.log(`Server is running on port ${port}`);
 });
+
+module.exports = app;
