@@ -1,13 +1,14 @@
 <html lang="en">
-  <%- include('./partials/head.ejs') %>
+  <%- include('../partials/head.ejs') %>
   <body>
-    <h1>DAL's Restaurant</h1>
-    <% include('./partials/nav.ejs') %>
-    <p>
-        <h2><%= menuItem.id %></h2>
-        <p><%= menuItem.name %></p>
-        <p><%= menuItem.price %></p>
-    </p>
+    <% include('../partials/nav.ejs') %>
+    <div class="menu content">
+      <h2>Menu Item:</h2>
+      <% if (aMenuItem.length > 0) 
+      var menuItem = aMenuItem[0]; { %>
+      <h3><%= menuItem.itemName %> <%= menuItem.itemPrice %></h3>
+      <% } %>
+    </div>
   </body>
-  <%- include('./partials/foot.ejs') %>
+  <%- include('../partials/foot.ejs') %>
 </html>

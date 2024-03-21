@@ -1,16 +1,16 @@
 <html lang="en">
-  <%- include('./partials/head.ejs') %>
+  <%- include('../partials/head.ejs') %>
   <body>
-    <h1>DAL's Restaurant</h1>
-    <% include('./partials/nav.ejs') %>
-    <p>
-        <h2>Edit Menu Item</h2>
-        <form action="/menu/<%= menuItem.id %>?_method=PUT" method="POST">
-            <input type="text" name="name" value="<%= menuItem.name %>" />
-            <input type="text" name="price" value="<%= menuItem.price %>" />
-            <button type="submit">Submit</button>
-        </form>
-    </p>
+    <% include('../partials/nav.ejs') %>
+    <div class="edit content">
+      <form action="/menu/<%= locals.theId %>?_method=PATCH" method="POST">
+        <label>Edit Menu Item:</br>
+          <input type="text" name="itemName" value="<%= locals.itemName %>" required>
+          <input type="text" name="itemPrice" value="<%= locals.itemPrice %>" required>
+        </label></br>
+        <button>PATCH</button>
+      </form>
+    </div>
   </body>
-  <%- include('./partials/foot.ejs') %>
+  <%- include('../partials/foot.ejs') %>
 </html>

@@ -1,23 +1,28 @@
 <html lang="en">
-  <body>
-    <%- include('./partials/head.ejs') %>
-    <%- include('./partials/nav.ejs') %>
-    <p>
-      <form action="/menu" method="post">
-        <h2>Menu</h2>
-        <ul>
-            <% for (let i = 0; i < menu.length; i++) { %>
-                <li><%= menu[i].name %> - $<%= menu[i].price %></li>
+    <%- include('../partials/head.ejs') %>
+    <body>
+        <%- include('../partials/nav.ejs') %>
+        <div class="menu content">
+            <form action="/menu" method="POST">
+                <b>Menu:</b><br>
+            <% if (aMenu.length > 0) { %>
+                <% aMenu.forEach(menu => { %>
+                    <b><%= menu.item %></b>
+                    <a href="/menu/<%=menu.id%>/edit?item=<%=menu.item%>">edit</a>
+                    <a href="/menu/<%=menu.id%>/delete?item=<%=menu.item%>">delete</a></br> 
+                    <% }) %>
             <% } %>
-
-            <li><a href="/menu/add">Add Item</a></li>
-
-            <li><a href="/menu/delete">Delete Item</a></li>
-
-            <li><a href="/menu/update">Update Item</a></li>
-        </ul>
-        </form>
-    </p>
-  </body>
-  <%- include('./partials/foot.ejs') %>
+            <br><label>Add Menu Item:</label><br>
+            <label>Item:
+                <input type="text" id="item" name="item" value="<%= locals.item %>" required>
+            </label>
+            <label>Price:
+                <input type="text" id="price" name="price" value="<%= locals.price %>" required>
+            </label>
+            <br>
+            <button>POST</button>
+            </form>
+        </div>
+    </body>
+    <%- include('../partials/foot.ejs') %>
 </html>
