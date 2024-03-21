@@ -1,27 +1,17 @@
 var router = require('express').Router();
-const menuController = require('../../services/pg.menu.dal.js');
+const menuDal = require('../services/pg.menu.dal.js');
+
+if (DEBUG) console.log('API - menu.js - called');
 
 router.get('/', async (req, res) => {
-    if(DEBUG) console.log('Getting menu - API');
+    if (DEBUG) console.log('routes/api/menu.js - GET / - called');
     try {
-        const menu = await menuController.getMenu();
-        res.json(menu);
-    } catch (error) {
-        res.status(500).json(error.message);
-    }
-});
-
-router.get('/:id', async (req, res) => {
-    if(DEBUG) console.log('Getting menu item - API');
-    try {
-        const menuItem = await menuController.getMenuItem(req.params.id);
-        if (menuItem === undefined) {
-            res.status(404).json({ id: req.params.id });
-        } else {
-            res.json(menuItem);
-        }
-    } catch (error) {
-        res.status(500).json(error.message);
+        let theMenu = await menuDal.getMenu();
+        if(DEBUG) console.table(theMenu);
+        res.json(theMenu);
+    } catch {
+        res.statusCode = 503;
+        res.json({message: 'Service Unavailable', status: 503});
     }
 });
 

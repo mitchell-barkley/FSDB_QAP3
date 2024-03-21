@@ -7,8 +7,8 @@ router.get('/', async (req, res) => {
         let theLogins = await loginsDal.getLogins();
         if(DEBUG) console.table(theLogins);
         res.render('./logins/logins.ejs', {theLogins});
-    } catch {
-        res.render('503');
+    } catch (error) {
+        res.status(503).render('error.ejs', {message: 'Service Unavailable', status: '503'});
     }
 });
 
