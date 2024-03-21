@@ -23,11 +23,11 @@ app.use('/logins', loginsRouter);
 const apiRouter = require('./routes/api');
 app.use('/api', apiRouter);
 
-const menuRouter = require('./routes/menu.js');
-app.use('/menu', menuRouter);
+// const menuRouter = require('./routes/menu.js');
+// app.use('/menu', menuRouter);
 
-const menuApiRouter = require('./routes/api/menu.js');
-app.use('/api/menu', menuApiRouter);
+// const menuApiRouter = require('./routes/api/menu.js');
+// app.use('/api/menu', menuApiRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

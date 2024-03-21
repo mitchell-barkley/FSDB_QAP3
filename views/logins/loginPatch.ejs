@@ -1,7 +1,7 @@
 <html lang="en">
-    <%- include('./partials/head.ejs') %>
+    <%- include('../partials/head.ejs') %>
     <body>
-        <%- include('./partials/nav.ejs') %>
+        <%- include('../partials/nav.ejs') %>
         <div class="edit content">
             <form action="/logins/<%= locals.theId %>?_method=PATCH" method="POST">
                 <label>Edit Login Fields:</br>
@@ -12,5 +12,5 @@
             </form>
         </div>
     </body>
-    <%- include('./partials/foot.ejs') %>
+    <%- include('../partials/foot.ejs') %>
 </html>
