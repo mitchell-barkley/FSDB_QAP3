@@ -3,7 +3,7 @@ const dal = require("./pg.menudb.js");
 var getMenu = function() {
     if(DEBUG) console.log('Getting menu from DB');
     return new Promise((resolve, reject) => {
-        const sql = `SELECT * FROM public."pizzas" ORDER BY id DESC;`;
+        const sql = `SELECT * FROM public."pizzas" ORDER BY pizza_name DESC;`;
         dal.query(sql, [], (err, res) => {
             if (err) {
                 if(DEBUG) console.log(err);

@@ -17,14 +17,14 @@ app.get('/contact', (req, res) => {
     res.render('contact.ejs')
 });
 
+const apiRouter = require('./routes/api');
+app.use('/api', apiRouter);
+
 const loginsRouter = require('./routes/logins.js');
 app.use('/logins', loginsRouter);
 
 const menuRouter = require('./routes/menu.js');
 app.use('/menu', menuRouter);
-
-const apiRouter = require('./routes/api');
-app.use('/api', apiRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

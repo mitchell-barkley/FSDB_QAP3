@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
         if(DEBUG) console.table(theMenu);
         res.render('./menu/menu.ejs', {theMenu});
     } catch (error) {
-        res.status(503).render('error.ejs', {message: error.message});
+        res.status(503).render('error.ejs', {message: 'Service Unavailable', status: '503'});
     }
 });
 

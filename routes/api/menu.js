@@ -1,5 +1,5 @@
 var router = require('express').Router();
-const menuDal = require('../services/pg.menu.dal.js');
+const menuDal = require('../../services/pg.menu.dal.js');
 
 if (DEBUG) console.log('API - menu.js - called');
 

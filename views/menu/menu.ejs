@@ -5,16 +5,19 @@
         <div class="menu content">
             <form action="/menu" method="POST">
                 <b>Menu:</b><br>
-            <% if (aMenu.length > 0) { %>
-                <% aMenu.forEach(menu => { %>
-                    <b><%= menu.item %></b>
-                    <a href="/menu/<%=menu.id%>/edit?item=<%=menu.item%>">edit</a>
-                    <a href="/menu/<%=menu.id%>/delete?item=<%=menu.item%>">delete</a></br> 
+            <% if (theMenu.length > 0) { %>
+                <% theMenu.forEach(menu => { %>
+                    <b>
+                        <%= menu.pizza_name %>
+                        <%= menu.price %>
+                    </b>
+                    <a href="/menu/<%=theMenu.id%>/edit?item=<%=theMenu.pizza_name%>">edit</a>
+                    <a href="/menu/<%=theMenu.id%>/delete?item=<%=theMenu.pizza_name%>">delete</a></br> 
                     <% }) %>
             <% } %>
             <br><label>Add Menu Item:</label><br>
-            <label>Item:
-                <input type="text" id="item" name="item" value="<%= locals.item %>" required>
+            <label>Pizza Name:
+                <input type="text" id="item" name="item" value="<%= locals.pizza_name %>" required>
             </label>
             <label>Price:
                 <input type="text" id="price" name="price" value="<%= locals.price %>" required>
