@@ -1,0 +1,23 @@
+<html lang="en">
+  <body>
+    <%- include('./partials/head.ejs') %>
+    <%- include('./partials/nav.ejs') %>
+    <p>
+      <form action="/menu" method="post">
+        <h2>Menu</h2>
+        <ul>
+            <% for (let i = 0; i < menu.length; i++) { %>
+                <li><%= menu[i].name %> - $<%= menu[i].price %></li>
+            <% } %>
+
+            <li><a href="/menu/add">Add Item</a></li>
+
+            <li><a href="/menu/delete">Delete Item</a></li>
+
+            <li><a href="/menu/update">Update Item</a></li>
+        </ul>
+        </form>
+    </p>
+  </body>
+  <%- include('./partials/foot.ejs') %>
+</html>

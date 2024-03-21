@@ -1,7 +1,8 @@
 var router = require('express').Router();
-const menuController = require('../services/pg.menu.dal.js');
+const menuController = require('../../services/pg.menu.dal.js');
 
 router.get('/', async (req, res) => {
+    if(DEBUG) console.log('Getting menu - API');
     try {
         const menu = await menuController.getMenu();
         res.json(menu);
@@ -11,6 +12,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
+    if(DEBUG) console.log('Getting menu item - API');
     try {
         const menuItem = await menuController.getMenuItem(req.params.id);
         if (menuItem === undefined) {

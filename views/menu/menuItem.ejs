@@ -1,8 +1,5 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Full-Stack/Database QAP3</title>
-  </head>
+  <%- include('./partials/head.ejs') %>
   <body>
     <h1>DAL's Restaurant</h1>
     <% include('./partials/nav.ejs') %>
@@ -12,3 +9,5 @@
         <p><%= menuItem.price %></p>
     </p>
   </body>
+  <%- include('./partials/foot.ejs') %>
+</html>

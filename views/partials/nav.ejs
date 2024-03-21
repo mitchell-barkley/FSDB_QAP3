@@ -1,6 +1,31 @@
 <nav>
-    <a href="/views/index.ejs">Menu</a>
-    <a href="/views/menuItem.ejs">New Menu Item</a>
-    <a href="/views/menuEdit.ejs">Edit Menu Item</a>
-    <a href="/views/menuDelete.ejs">Delete Menu Item</a>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/logins">Logins</a></li>
+        <li><a href="/menu">Menu</a></li>
+        <li><a href="/contact">Contact</a></li>
+    </ul>
+    <style>
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
 </nav>
