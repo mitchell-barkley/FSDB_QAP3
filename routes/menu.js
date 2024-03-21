@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const menuDal = require('../services/pg.menu.dal.js');
-// const menuDal = require('../../services/m.menu.dal');
 
 router.get('/', async (req, res) => {
     try {
-        let themenu = await menuDal.getMenu();
-        if(DEBUG) console.table(themenu);
-        res.render('menu', {themenu});
+        let menu = await menuDal.getMenu();
+        if(DEBUG) console.table(menu);
+        res.render('/menu/', {menu});
     } catch {
         res.render('503');
     }
@@ -15,12 +14,12 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        let aLogin = await menuDal.getMenuById(req.params.id);
-        if(DEBUG) console.table(aLogin);
-        if(aLogin.length === 0){
-            res.render('norecord', {id: req.params.id, type: 'login'});
+        let menuItem = await menuDal.getMenuById(req.params.id);
+        if(DEBUG) console.table(menuItem);
+        if(menuItem.length === 0){
+            res.render('error.js', {id: req.params.id, type: 'menu item', message: 'No such menu item found.'});
         }
-        res.render('login', {aLogin});
+        res.render('/menuItem/', {menuItem});
     } catch {
         res.render('503');
     }
@@ -29,7 +28,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     if(DEBUG) console.log("menu.POST");
     try {
-        await menuDal.addLogin(req.body.username, req.body.password);
+        await menuDal.addMenuItem(req.body.menuItem, req.body.price);
         res.redirect('/menu/');
     } catch (err){
         if(DEBUG) console.log(err);
@@ -39,18 +38,18 @@ router.post('/', async (req, res) => {
 
 router.get('/:id/edit', async (req, res) => {
     if(DEBUG) console.log("menu.EDIT");
-    res.render('loginPatch.ejs', {username: req.query.username, theId: req.params.id});
+    res.render('menuEdit.ejs', {id: req.params.id, menuItem: req.query.menuItem, price: req.query.price});
 });
 
 router.get('/:id/delete', async (req, res) => {
     if(DEBUG) console.log("menu.DELETE");
-    res.render('loginDelete.ejs', {username: req.query.username, theId: req.params.id});
+    res.render('menuDelete.ejs', {id: req.params.id, menuItem: req.query.menuItem, price: req.query.price});
 });
 
 router.patch('/:id', async (req, res) => {
     if(DEBUG) console.log("menu.PATCH");
     try {
-        await menuDal.updateLogin(req.params.id, req.body.username, req.body.password);
+        await menuDal.updateMenuItem(req.params.id, req.body.username, req.body.password);
         res.redirect('/menu/');
     } catch (err){
         if(DEBUG) console.log(err);
@@ -61,7 +60,7 @@ router.patch('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     if(DEBUG) console.log("menu.DELETE");
     try {
-        await menuDal.deleteLogin(req.params.id);
+        await menuDal.deleteMenuItem(req.params.id);
         res.redirect('/menu/');
     } catch (err){
         if(DEBUG) console.log(err);
