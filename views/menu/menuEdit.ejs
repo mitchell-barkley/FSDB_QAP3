@@ -1,16 +1,24 @@
 <html lang="en">
-  <%- include('../partials/head.ejs') %>
+  <%- include('./partials/head.ejs') %>
   <body>
-    <% include('../partials/nav.ejs') %>
+    <%- include('./partials/nav.ejs') %>
     <div class="edit content">
-      <form action="/menu/<%= locals.theId %>?_method=PATCH" method="POST">
+      <form action="/menu/<%= locals.id %>?_method=PATCH" method="POST">
         <label>Edit Menu Item:</br>
-          <input type="text" name="itemName" value="<%= locals.itemName %>" required>
-          <input type="text" name="itemPrice" value="<%= locals.itemPrice %>" required>
+          <input type="text" name="pizza_name" value="<%= locals.pizza_name %>" required>
+          <input type="text" name="price" value="<%= locals.price %>" required>
+          <input type="text" name="sauce" value="<%= locals.sauce %>" required>
+          <input type="text" name="cheese" value="<%= locals.cheese %>" required>
+          <input type="text" name="topping1" value="<%= locals.topping1 %>">
+          <input type="text" name="topping2" value="<%= locals.topping2 %>">
+          <input type="text" name="topping3" value="<%= locals.topping3 %>">
+          <input type="text" name="topping4" value="<%= locals.topping4 %>">
+          <input type="text" name="topping5" value="<%= locals.topping5 %>">
+          <input type="text" name="topping6" value="<%= locals.topping6 %>">
         </label></br>
-        <button>PATCH</button>
+        <button>EDIT</button>
       </form>
     </div>
   </body>
-  <%- include('../partials/foot.ejs') %>
+  <%- include('./partials/foot.ejs') %>
 </html>

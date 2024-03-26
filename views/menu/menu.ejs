@@ -1,26 +1,73 @@
 <html lang="en">
     <%- include('../partials/head.ejs') %>
     <body>
+        <style type="text/css">
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-family: Arial, sans-serif;
+                width: 100%;
+            }
+            .menu-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+        </style>
         <%- include('../partials/nav.ejs') %>
         <div class="menu content">
             <form action="/menu" method="POST">
                 <b>Menu:</b><br>
             <% if (theMenu.length > 0) { %>
                 <% theMenu.forEach(menu => { %>
-                    <b>
-                        <%= menu.pizza_name %>
-                        <%= menu.price %>
-                    </b>
-                    <a href="/menu/<%=theMenu.id%>/edit?item=<%=theMenu.pizza_name%>">edit</a>
-                    <a href="/menu/<%=theMenu.id%>/delete?item=<%=theMenu.pizza_name%>">delete</a></br> 
-                    <% }) %>
-            <% } %>
+                    <p><%= menu.pizza_name %>&bull;<%= menu.price %></p>
+                    <ul>
+                        <li><%= menu.sauce %></li>
+                        <li><%= menu.cheese %></li>
+                        <li><%= menu.topping1 %></li>
+                        <li><%= menu.topping2 %></li>
+                        <li><%= menu.topping3 %></li>
+                        <li><%= menu.topping4 %></li>
+                        <li><%= menu.topping5 %></li>
+                        <li><%= menu.topping6 %></li>
+                    </ul>
+                    <a href="/menu/<%=menu.id%>edit?id=<%=menu.id%>">edit</a>
+                    <a href="/menu/<%=menu.id%>delete?id=<%=menu.id%>">delete</a>
+            <% }) %>
+        </div>
+    <% } %>
             <br><label>Add Menu Item:</label><br>
-            <label>Pizza Name:
-                <input type="text" id="item" name="item" value="<%= locals.pizza_name %>" required>
-            </label>
             <label>Price:
                 <input type="text" id="price" name="price" value="<%= locals.price %>" required>
+            </label><br>
+            <label>Pizza Name:
+                <input type="text" id="pizza_name" name="pizza_name" value="<%= locals.pizza_name %>" required>
+            </label><br>
+            <label>Sauce:
+                <input type="text" id="sauce" name="sauce" value="<%= locals.sauce %>" required>
+            </label><br>
+            <label>Cheese:
+                <input type="text" id="cheese" name="cheese" value="<%= locals.cheese %>" required>
+            </label><br>
+            <label>Topping1:
+                <input type="text" id="topping1" name="topping1" value="<%= locals.topping1 %>">
+            </label><br>
+            <label>Topping2:
+                <input type="text" id="topping2" name="topping2" value="<%= locals.topping2 %>">
+            </label><br>
+            <label>Topping3:
+                <input type="text" id="topping3" name="topping3" value="<%= locals.topping3 %>">
+            </label><br>
+            <label>Topping4:
+                <input type="text" id="topping4" name="topping4" value="<%= locals.topping4 %>">
+            </label><br>
+            <label>Topping5:
+                <input type="text" id="topping5" name="topping5" value="<%= locals.topping5 %>">
+            </label><br>
+            <label>Topping6:
+                <input type="text" id="topping6" name="topping6" value="<%= locals.topping6 %>">
             </label>
             <br>
             <button>POST</button>
