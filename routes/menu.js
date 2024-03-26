@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
         if(DEBUG) console.table(theMenu);
         res.render('./menu/menu.ejs', {theMenu});
     } catch (error) {
-        res.status(503).render('error.ejs', {message: 'Service Unavailable', status: '503'});
+        res.render('error.ejs', {message: 'Service Unavailable', status: '503'});
     }
 });
 
@@ -21,18 +21,18 @@ router.get('/:id', async (req, res) => {
         }
         res.render('./menu/menuItem.ejs', {menuItem});
     } catch {
-        res.render('503');
+        res.render('error.ejs', {message: 'Service Unavailable', status: '503'});
     }
 });
 
 router.post('/', async (req, res) => {
     if(DEBUG) console.log("menu.POST");
     try {
-        await menuDal.addMenuItem(req.body.menuItem, req.body.price);
+        await menuDal.addMenuItem(req.body.price, req.body.pizza_name, req.body.sauce, req.body.cheese, req.body.topping1, req.body.topping2, req.body.topping3, req.body.topping4, req.body.topping5, req.body.topping6);
         res.redirect('./menu/');
     } catch (err){
         if(DEBUG) console.log(err);
-        res.render('503');
+        res.render('error.ejs', {message: 'Service Unavailable', status: '503'});
     }
 });
 
@@ -49,11 +49,11 @@ router.get('/:id/delete', async (req, res) => {
 router.patch('/:id', async (req, res) => {
     if(DEBUG) console.log("menu.PATCH");
     try {
-        await menuDal.updateMenuItem(req.params.id, req.body.username, req.body.password);
-        res.redirect('/menu/');
+        await menuDal.updateMenuItem(req.params.id, req.body.price, req.body.menuItem, req.body.sauce, req.body.cheese, req.body.topping1, req.body.topping2, req.body.topping3, req.body.topping4, req.body.topping5, req.body.topping6);
+        res.redirect('/menu');
     } catch (err){
         if(DEBUG) console.log(err);
-        res.render('503');
+        res.render('error.ejs', {message: 'Service Unavailable', status: '503'});
     }
 });
 

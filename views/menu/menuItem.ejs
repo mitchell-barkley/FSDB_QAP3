@@ -3,11 +3,13 @@
   <body>
     <% include('../partials/nav.ejs') %>
     <div class="menu content">
-      <h2>Menu Item:</h2>
-      <% if (aMenuItem.length > 0) 
-      var menuItem = aMenuItem[0]; { %>
-      <h3><%= menuItem.itemName %> <%= menuItem.itemPrice %></h3>
-      <% } %>
+      <form action="/menu/<%= locals.id %>?_method=PATCH" method = "POST">
+        <h2>Pizza:</h2>
+        <% if (theMenu[id].length > 0)
+            var menuItem = theMenu[0];{ %>
+            <h3><%= theMenu.pizza_name %> <%= theMenu.price %></h3>
+        <% } %>
+
     </div>
   </body>
   <%- include('../partials/foot.ejs') %>
