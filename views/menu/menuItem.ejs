@@ -3,13 +3,10 @@
   <body>
     <% include('../partials/nav.ejs') %>
     <div class="menu content">
-      <form action="/menu/<%= locals.id %>?_method=PATCH" method = "POST">
+      <form action="/menu/<%= locals.pizza_id %>?_method=PATCH" method = "POST">
         <h2>Pizza:</h2>
-        <% if (theMenu[id].length > 0)
-            var menuItem = theMenu[0];{ %>
-            <h3><%= theMenu.pizza_name %> <%= theMenu.price %></h3>
-        <% } %>
-
+        <form>
+        </form>
     </div>
   </body>
   <%- include('../partials/foot.ejs') %>

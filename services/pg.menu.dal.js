@@ -55,13 +55,13 @@ var getMenuItem = function (id) {
 var updateMenuItem = function(id, price, pizza_name, sauce, cheese, topping1, topping2, topping3, topping4, topping5, topping6) {
     if(DEBUG) console.log('Updating menu item in DB');
     return new Promise((resolve, reject) => {
-        const sql = `UPDATE public."pizzas" SET price=$1, pizza_name=$2, sauce=$3, cheese=$4, topping1=$5, topping2=$6, topping3=$7, topping4=$8, topping5=$9, topping6=$10 WHERE id=$11;`;
+        const sql = `UPDATE public."pizzas" SET price=$2, pizza_name=$3, sauce=$4, cheese=$5, topping1=$6, topping2=$7, topping3=$8, topping4=$9, topping5=$10, topping6=$11 WHERE id=$1;`;
         for (let i = 0; i < 10; i++) {
             if (arguments[i] === undefined || arguments[i] === "") {
                 arguments[i] = " ";
             }
         }
-        dal.query(sql, [price, pizza_name, id], (err, res) => {
+        dal.query(sql, [id, price, pizza_name, sauce, cheese, topping1, topping2, topping3, topping4, topping5, topping6], (err, res) => {
             if (err) {
                 if(DEBUG) console.log(err);
                 reject(err);

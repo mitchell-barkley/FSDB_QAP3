@@ -1,14 +1,19 @@
 <html lang="en">
-  <%- include('./partials/head.ejs') %>
+  <%- include('../partials/head.ejs') %>
   <body>
-    <%- include('./partials/nav.ejs') %>
+    <%- include('../partials/nav.ejs') %>
     <div class="edit content">
-      <form action="/menu/<%= locals.id %>?_method=PATCH" method="POST">
-        <label>Edit Menu Item:</br>
+      <form action="/menu/<%= locals.pizza_id %>?_method=PATCH" method="POST">
+        <label><h2>Edit Menu Item:</h2></br>
+          Name:
           <input type="text" name="pizza_name" value="<%= locals.pizza_name %>" required>
+          Price:
           <input type="text" name="price" value="<%= locals.price %>" required>
+          Sauce:
           <input type="text" name="sauce" value="<%= locals.sauce %>" required>
+          Cheese:
           <input type="text" name="cheese" value="<%= locals.cheese %>" required>
+          Toppings (Optional - 6 max): 
           <input type="text" name="topping1" value="<%= locals.topping1 %>">
           <input type="text" name="topping2" value="<%= locals.topping2 %>">
           <input type="text" name="topping3" value="<%= locals.topping3 %>">
@@ -20,5 +25,5 @@
       </form>
     </div>
   </body>
-  <%- include('./partials/foot.ejs') %>
+  <%- include('../partials/foot.ejs') %>
 </html>
